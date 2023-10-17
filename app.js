@@ -24,6 +24,8 @@ const crateData = [
     use: () => {
       const barrelIndex = interactions.findIndex((item) => item.id == 1472);
       interactions[barrelIndex].canBeFound = true;
+      const barrel2Index = interactions.findIndex((item) => item.id == 1523);
+      interactions[barrel2Index].canBeFound = true;
       noteAudio.play();
       showMessage(
         "The crate is filled with strange papers and documents. You find an old leather bound diary. The pages are torn and stained, almost impossible to read. On one page you can see part of an entry: 'I _a_ __ h_de th_ k_y in a __rr_l'"
@@ -113,6 +115,29 @@ const hiddenInteractionData = [
     use: () => {
       gotKey = true;
 
+      //make paired barrel used
+      const barrel2Index = interactions.findIndex((item) => item.id == 1523);
+      interactions[barrel2Index].used = true;
+
+      if (gotGem && gotKey) {
+        mainDoorKey = true;
+      }
+      getItemAudio.play();
+      showMessage(
+        "Unlike the other barrels you have come across, the lid on this one is not sealed. You open it and search inside. It's mainly filled with old clothes and rags. You hand grazes something cold and metal... you pull out a large old key with a gem shaped groove on it's handle."
+      );
+    },
+  },
+  {
+    //barrel. main door key 2
+    canBeFound: false,
+    use: () => {
+      gotKey = true;
+
+      //make paired barrel used
+      const barrelIndex = interactions.findIndex((item) => item.id == 1472);
+      interactions[barrelIndex].used = true;
+
       if (gotGem && gotKey) {
         mainDoorKey = true;
       }
@@ -179,9 +204,9 @@ const getItemAudio = PIXI.sound.Sound.from(
 const startGame = () => {
   document.querySelector(".welcome-screen").style.display = "none";
 
-  mainMusic.play({
-    loop: true,
-  });
+  // mainMusic.play({
+  //   loop: true,
+  // });
   gameStarted = true;
   //start keyframes/ looping
   app.ticker.add((delta) => loop(delta));
@@ -740,6 +765,8 @@ fetch("./assets/dungeon_game_map.json")
         }
       });
     });
+
+    console.log(interactions);
   })
   .catch((err) => {
     console.log(err);
