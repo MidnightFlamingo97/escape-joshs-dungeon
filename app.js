@@ -204,9 +204,9 @@ const getItemAudio = PIXI.sound.Sound.from(
 const startGame = () => {
   document.querySelector(".welcome-screen").style.display = "none";
 
-  // mainMusic.play({
-  //   loop: true,
-  // });
+  mainMusic.play({
+    loop: true,
+  });
   gameStarted = true;
   //start keyframes/ looping
   app.ticker.add((delta) => loop(delta));
