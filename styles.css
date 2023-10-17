@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Pixelify Sans", sans-serif;
+  user-select: none;
+  font-weight: 400;
+}
+
+body {
+  background-color: black;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+.screen-block {
+  background-color: black;
+  position: absolute;
+  width: 100svw;
+  height: 100svh;
+  display: none;
+  z-index: 2;
+  color: white;
+  font-size: 24px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.welcome-screen {
+  background-color: #25131a;
+  position: absolute;
+  width: 100svw;
+  height: 100svh;
+  display: flex;
+  z-index: 1;
+  color: white;
+  font-size: 24px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 12px;
+}
+
+button {
+  padding: 6px 48px;
+  font-size: 36px;
+  border: none;
+  background-color: white;
+  color: #25131a;
+  border: solid 2px white;
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #25131a;
+  color: white;
+}
+
+.top-margin {
+  margin-top: 24px;
+}
+
+canvas {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1000px) {
+  .screen-block {
+    display: flex;
+  }
+}
+
+@media (max-height: 600px) {
+  .screen-block {
+    display: flex;
+  }
+}
