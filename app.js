@@ -765,8 +765,6 @@ fetch("./assets/dungeon_game_map.json")
         }
       });
     });
-
-    console.log(interactions);
   })
   .catch((err) => {
     console.log(err);
