@@ -13,7 +13,7 @@ const crateData = [
     use: () => {
       app.stage.addChild(shroud2);
       app.stage.removeChild(shroud);
-
+      getItemAudio.play();
       showMessage(
         "As you approach the crate it begins to glow. A small glowing orb begins to rise up and float towards you. You absorb it... and gain the gift of night sight!"
       );
@@ -24,6 +24,7 @@ const crateData = [
     use: () => {
       const barrelIndex = interactions.findIndex((item) => item.id == 1472);
       interactions[barrelIndex].canBeFound = true;
+      noteAudio.play();
       showMessage(
         "The crate is filled with strange papers and documents. You find an old leather bound diary. The pages are torn and stained, almost impossible to read. On one page you can see part of an entry: 'I _a_ __ h_de th_ k_y in a __rr_l'"
       );
@@ -32,6 +33,7 @@ const crateData = [
   {
     use: () => {
       //starter clue crate
+      noteAudio.play();
       showMessage(
         "You spot a note on a crate. It seems ancient; covered in symbols you do not understand. However, you can make out an old sketch of a large door and a strange key with a large gem on its handle..."
       );
@@ -40,6 +42,7 @@ const crateData = [
   {
     //something for v2
     use: () => {
+      noteAudio.play();
       showMessage(
         "The crate is empty... other than a few cobwebs and insects."
       );
@@ -50,6 +53,7 @@ const crateData = [
     use: () => {
       const gemIndex = interactions.findIndex((item) => item.id == 510);
       interactions[gemIndex].canBeFound = true;
+      noteAudio.play();
       showMessage(
         "You rummage through the crate and find a tattered book. It's pretty old and boring... but on one of the pages there is a rough sketch of a room with 3 inset areas. An arrow points to the left most inset, along with an annotated sketch of a specific brick formation"
       );
@@ -62,6 +66,7 @@ const hiddenInteractionData = [
     //top left, Gem location
     canBeFound: false,
     use: () => {
+      getItemAudio.play();
       gotGem = true;
 
       if (gotGem && gotKey) {
@@ -85,6 +90,7 @@ const hiddenInteractionData = [
     canBeFound: true,
     use: () => {
       smallDoor2Key = true;
+      getItemAudio.play();
       showMessage(
         "You kick a rock and hear a rattle... On closer inspection, you see the rock is fake and has a seam running around it. You prise it open, and find a small key inside!"
       );
@@ -95,6 +101,7 @@ const hiddenInteractionData = [
     canBeFound: true,
     use: () => {
       smallDoor1Key = true;
+      getItemAudio.play();
       showMessage(
         "Something shiny catches your eye in the corner. You brush away some cobwebs and find a small key"
       );
@@ -109,7 +116,7 @@ const hiddenInteractionData = [
       if (gotGem && gotKey) {
         mainDoorKey = true;
       }
-
+      getItemAudio.play();
       showMessage(
         "Unlike the other barrels you have come across, the lid on this one is not sealed. You open it and search inside. It's mainly filled with old clothes and rags. You hand grazes something cold and metal... you pull out a large old key with a gem shaped groove on it's handle."
       );
@@ -535,14 +542,17 @@ fetch("./assets/dungeon_game_map.json")
 
                 app.stage.removeChild(mainDoor);
 
+                unlockAudio.play();
                 showMessage(
                   "You lift the key to the lock and it flies out of your hand. It clicks into the padlock, which then shatters onto the ground. The bolt across the door begins to slide, and the door slowly creaks open."
                 );
               } else if (gotKey) {
+                lockedAudio.play();
                 showMessage(
                   "You try to put the large key in the lock... but you can't! It's as if the lock is repelling the key. Each time you try, the force get's stronger and stronger. The door remains locked"
                 );
               } else {
+                lockedAudio.play();
                 showMessage(
                   "A massive, old wooden door blocks your path. You try to pull the bolt across to open it, but it stays firmly locked in place by a strange glowing padlock"
                 );
@@ -593,20 +603,24 @@ fetch("./assets/dungeon_game_map.json")
 
                   app.stage.removeChild(smallDoor1);
                   if (smallDoor1Key && smallDoor2Key) {
+                    unlockAudio.play();
                     showMessage(
                       "You try to unlock you door with one of the keys you found... It's a perfect fit! You unlock the door"
                     );
                   } else {
+                    unlockAudio.play();
                     showMessage(
                       "You try to unlock you door with the key you found... It's a perfect fit! You unlock the door"
                     );
                   }
                 } else {
+                  lockedAudio.play();
                   showMessage(
                     "You try to unlock you door with the key you found, but it does not fit."
                   );
                 }
               } else {
+                lockedAudio.play();
                 showMessage("The door is locked shut.");
               }
             },
@@ -652,20 +666,24 @@ fetch("./assets/dungeon_game_map.json")
 
                   app.stage.removeChild(smallDoor2);
                   if (smallDoor1Key && smallDoor2Key) {
+                    unlockAudio.play();
                     showMessage(
                       "You try to unlock you door with one of the keys you found... It's a perfect fit! You unlock the door"
                     );
                   } else {
+                    unlockAudio.play();
                     showMessage(
                       "You try to unlock you door with the key you found... It's a perfect fit! You unlock the door"
                     );
                   }
                 } else {
+                  lockedAudio.play();
                   showMessage(
                     "You try to unlock you door with the key you found, but it does not fit."
                   );
                 }
               } else {
+                lockedAudio.play();
                 showMessage("The door is locked shut.");
               }
             },
@@ -905,6 +923,7 @@ const pressSpace = () => {
 
     if (mainDoorKey && !mergeMessageShown) {
       mergeMessageShown = true;
+      getItemAudio.play();
       showMessage(
         "The gem and the key attract to each other like magnets. You click the gem perfectly into the groove on the key's handle... The key glows bright and you can feel it trying to pull you to the east."
       );
